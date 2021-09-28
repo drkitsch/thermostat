@@ -9,7 +9,13 @@ describe('Thermostat', function() {
 
  it('is initialized with a temperature of 20 degrees', function() {
   thermostat = new Thermostat();
-  expect(thermostat.temperature).toEqual(20)
+  expect(thermostat.temperature).toEqual(20);
  });
 
+ it('increases the temperature', function() {
+  thermostat = new Thermostat();
+  thermostat.up(1);
+  expect(thermostat.temperature).toEqual(21);
+ });
+ 
 });
