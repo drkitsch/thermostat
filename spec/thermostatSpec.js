@@ -11,22 +11,27 @@ describe('Thermostat', function() {
  });
 
  it('is initialized with a temperature of 20 degrees', function() {
-  expect(thermostat.temperature).toEqual(20);
+  expect(thermostat.getCurrentTemperature()).toEqual(20);
  });
 
  it('increases the temperature', function() {
-  thermostat.up(1);
-  expect(thermostat.temperature).toEqual(21);
+  thermostat.up();
+  expect(thermostat.getCurrentTemperature()).toEqual(21);
  });
  
  it('decreases the temperature', function() {
-  thermostat.down(1);
-  expect(thermostat.temperature).toEqual(19);
+  thermostat.down();
+  expect(thermostat.getCurrentTemperature()).toEqual(19);
  });
 
-it('raises an error if temperature goes below minimum temperature', function() {
-  thermostat.down(1);
-  expect(function(){thermostat.down(10)} ).toThrow(new Error('Minimum temperature passed'));
-});
+ it('has a minimum of 10 degrees', function() { 
+  for (let i = 0; i < 11; i++) { 
+    thermostat.down();
+  }
+  expect(thermostat.getCurrentTemperature()).toEqual(10); 
+}); 
+
+ 
+
 
 });

@@ -1,21 +1,33 @@
 class Thermostat {
 
-  constructor(temperature) { 
+  constructor() { 
     this.temperature = 20;
     this.MINIMUM_TEMPERATURE = 10
   }
 
-   up(number) {
-    return this.temperature += number;
+  getCurrentTemperature() { 
+    return this.temperature;
   }
 
- down(number) {
-  if (this.temperature < this.MINIMUM_TEMPERATURE) {
-    throw new Error('Minimum temperature passed');
-    } else {
-      return this.temperature -= number;
-    }
+  up() {
+    return this.temperature += 1;
   }
 
+  isMinimumTemperature() {
+    return this.temperature == this.MINIMUM_TEMPERATURE; 
+  }
+
+  down() {
+    if (this.isMinimumTemperature()) { 
+    return; 
+  } 
+    this.temperature -= 1
+  }
+  
+  
 }
+
+
+
+
 
