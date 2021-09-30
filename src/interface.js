@@ -2,7 +2,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const updateTemperature = function() {
     document.querySelector('#temperature').innerText = thermostat.temperature;
+    if (thermostat.energyUsage() === 'low-usage') {
+      document.querySelector('#temperature').style.color = 'green';
+    } else if (thermostat.energyUsage() === 'medium-usage') {
+      document.querySelector('#temperature').style.color = 'black';
+    } else {
+      document.querySelector('#temperature').style.color = 'red';
+    }
   }
+  
   
   const thermostat = new Thermostat();
   document.querySelector('#temperature').innerText = thermostat.temperature 
@@ -25,13 +33,13 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelector('#powersaving-on').addEventListener('click', function() {
   thermostat.switchPowerSavingModeOn();
   document.querySelector('#power-saving-status').innerText = 'on'; 
-  
+  updateTemperature();
   });
 
   document.querySelector('#powersaving-off').addEventListener('click', function() {
   thermostat.switchPowerSavingModeOff();
   document.querySelector('#power-saving-status').innerText = 'off';
-  
+  updateTemperature();
   });
   
 
