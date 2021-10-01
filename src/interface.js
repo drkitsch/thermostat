@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  const updateTemperature = function() {
+
+
+   const updateTemperature = () => {
     document.querySelector('#temperature').innerText = thermostat.temperature;
     if (thermostat.energyUsage() === 'low-usage') {
       document.querySelector('#temperature').style.color = 'green';
@@ -11,9 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
   
-  
   const thermostat = new Thermostat();
-  document.querySelector('#temperature').innerText = thermostat.temperature 
+  document.querySelector('#temperature').innerText = thermostat.temperature;
 
   document.querySelector('#temperature-up').addEventListener('click', function() {
   thermostat.up();
@@ -41,6 +42,20 @@ document.addEventListener("DOMContentLoaded", function() {
   document.querySelector('#power-saving-status').innerText = 'off';
   updateTemperature();
   });
-  
 
+  const selectElement = document.querySelector('#current-city'); 
+  selectElement.addEventListener('change', (Event) => {
+    const city = Event.target.value;
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=572fec089d6ffda715a4083583171d67&units=metric`
+ 
+    fetch(url)
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      document.querySelector('#current-temperature').innerText = data.main.temp;
+    });
+  });
+  
 });
+
